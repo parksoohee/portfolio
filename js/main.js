@@ -120,7 +120,7 @@
 			$('#fh5co-skills').waypoint( function( direction ) {
 										
 				if( direction === 'down' && !$(this.element).hasClass('animated') ) {
-					setTimeout( pieChart , 400);					
+					setTimeout( pieChart , 700);					
 					$(this.element).addClass('animated');
 				}
 			} , { offset: '90%' } );
