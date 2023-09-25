@@ -1007,6 +1007,7 @@ header{
 .unslate_co--site-nav .site-logo.pos-absolute {
   position: fixed;
   left: 50%;
+  width: 174px;
   -webkit-transform: translateX(-50%);
   -ms-transform: translateX(-50%);
   transform: translateX(-50%);
@@ -3504,7 +3505,7 @@ input[type="text"] {
     width:35px;
     height:25px;
     cursor:pointer;
-    z-index:99;
+    z-index:101;
   }
   .burgur{
     right: 0;
@@ -3561,6 +3562,7 @@ transform: translateY(-10px) rotate(-135deg);
     right:-100%;
     top:0;
     bottom:0;
+    z-index: 100;
     -webkit-transition: right .3s;
     -moz-transition: right .3s;
     -ms-transition: right .3s;
