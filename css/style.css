@@ -3657,17 +3657,17 @@ transform: translateY(-10px) rotate(-135deg);
   width: 50px;
   height: 50px;
 }
-.col-sm-6{
+#fh5co-skills .col-sm-6{
   width: 33.3%;
 }
 }
 @media (max-width:768px){
-  .col-sm-6{
+  #fh5co-skills .col-sm-6{
     width: 50%;
   }
 }
 @media (max-width:450px){
-  .col-sm-6{
+  #fh5co-skills .col-sm-6{
     width: 100%;
   }
 }
