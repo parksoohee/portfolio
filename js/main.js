@@ -106,11 +106,11 @@
 	var pieChart = function() {
 		$('.chart').easyPieChart({
 			scaleColor: false,
-			lineWidth: 10,
+			lineWidth: 30,
 			lineCap: 'butt',
 			barColor: '#ffff26',
 			trackColor:	"#f5f5f5",
-			size: 160,
+			size: 200,
 			animate: 2500
 		});
 	};
