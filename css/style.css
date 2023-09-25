@@ -779,7 +779,7 @@ header{
 }
 .position_text3{
   position: absolute;
-  top: 5%;
+  top: 8%;
   left: 2%;
   width: 50%;
   z-index: 10;
@@ -789,7 +789,7 @@ header{
 }
 .position_text4{
   position: absolute;
-  top: 5%;
+  top: 8%;
   right: 2%;
   width: 50%;
   z-index: 10;
@@ -1650,6 +1650,7 @@ PORTFOLIO
 }
 .centered-pills li {
 	display: inline;
+  margin-bottom: 10px;
 }
 .centered-pills a {
 	float: left;
@@ -2369,13 +2370,13 @@ PORTFOLIO
 .progress {
   width: 100%;
   float: left;
-  height: 10px;
+  height: 20px;
   box-shadow: none;
 }
 
 .progress-bar {
   background-color: #ffff26;
-  height: 10px;
+  height: 20px;
   display: block;
   box-shadow: none;
 }
@@ -2401,8 +2402,8 @@ PORTFOLIO
 }
 
 .chart {
-  width: 160px;
-  height: 160px;
+  width: 200px;
+  height: 200px;
   margin: 0 auto 40px auto;
   position: relative;
   text-align: center;
@@ -3624,6 +3625,8 @@ transform: translateY(-10px) rotate(-135deg);
 }
 .row2{
   flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
 }
 .large-12 {
   -ms-flex: 0 0 100%;
@@ -3642,6 +3645,31 @@ transform: translateY(-10px) rotate(-135deg);
 .row2 .large-4{
   width: 95%;
 }
+.s-contact .huge-text{
+  padding-right: 0;
+}
+#top_btn{
+  bottom: 30px;
+  right: 20px;
+}
+.top_btn{
+  font-size: 16px;
+  width: 50px;
+  height: 50px;
+}
+.col-sm-6{
+  width: 33.3%;
+}
+}
+@media (max-width:768px){
+  .col-sm-6{
+    width: 50%;
+  }
+}
+@media (max-width:450px){
+  .col-sm-6{
+    width: 100%;
+  }
 }
 @media (max-width:600px){
   .position{
