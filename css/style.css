@@ -52,7 +52,7 @@ body {
 .gnb_menu{
   display: none;
 }
-.slide{
+.slide_{
   display: none;
 }
 .unslate_co--site-nav .site-logo {
@@ -1758,6 +1758,11 @@ PORTFOLIO
 	transition: all 0.5s;
 	color:#fff;
 }
+.comming{
+  text-align: center;
+  align-items: center;
+  height: 100%;
+}
 .work_sub_title_3:hover{
 	background:#555;
 	transition: all 0.5s;
@@ -1772,6 +1777,49 @@ PORTFOLIO
 	display: flex;
 	margin:1em 0;
   flex-wrap: wrap;
+}
+/*gallery*/
+
+#gallery{
+  width: 90%;
+  margin: 0 auto;
+  padding: 50px 0;
+}
+#gallery h1{
+  text-align: center;
+}
+#gallery h1 span{
+  padding-bottom: 80px;
+  font-family: 'Pretendard';
+  font-weight: 800;
+  font-size: 40px;
+  line-height: 50px;
+  color: #fff;
+  background-color: #6edcea;
+  margin: 100px 0;
+  display: inline-block;
+  padding: 5px 20px;
+  border-radius: 30px;
+}
+.gallery{
+  padding-bottom: 20px;
+}
+.gallery .slide{
+  width: 100%;
+  display: block;
+}
+.gallery .slide a img{
+  max-width: 100%;
+}
+.gallery_pag{
+  margin-top: 30px;
+  position: relative;
+  width: 100%;
+  height: 5px;
+  background: #6edcea
+}
+.swiper-pagination-progressbar .swiper-pagination-progressbar-fill{
+  background-color: #28c3d7;
 }
 
 .clear{clear: both;}
@@ -1843,7 +1891,7 @@ PORTFOLIO
 #fh5co-blog,
 #fh5co-pricing,
 #fh5co-contact {
-  padding: 100px 0;
+  padding-top: 100px;
   clear: both;
 }
 #fh5co-skills{
@@ -2426,6 +2474,10 @@ PORTFOLIO
   position: absolute;
   left: 0;
   top: 0;
+}
+
+.skills{
+  padding-bottom: 100px;
 }
 
 .work {
@@ -3554,7 +3606,7 @@ transform: translateY(10px) rotate(135deg);
 transform: translateY(-10px) rotate(-135deg);
     background-color: #2dafde;
 }
-.slide{
+.slide_{
     display: flex;
     padding-top:150px;
     width:65%;/*이 너비에 따라 보이는 부분이 변화함*/
@@ -3570,17 +3622,17 @@ transform: translateY(-10px) rotate(-135deg);
     transition: right .3s;
     background-color:rgba(255,255,255,0.9);
 }
-.slide.on{
+.slide_.on{
     right:0;
 }
-.slide ul{
+.slide_ ul{
     width: 100%;
     padding: 0;
 }
-.slide ul li{
+.slide_ ul li{
     width:100%;
 }
-.slide ul li a{
+.slide_ ul li a{
     display:block;
     font-size:18px;
     font-weight: 500;
@@ -3602,12 +3654,12 @@ transform: translateY(-10px) rotate(-135deg);
     z-index:-1;
     visibility:hidden;
 }
-.slide ul li:hover .solid{
+.slide_ ul li:hover .solid{
     transform:scaleX(1);
     opacity:1;
     visibility:visible;
 }
-.slide ul li a:hover{
+.slide_ ul li a:hover{
   color: #46b8da;
 }
 .position{
