@@ -97,5 +97,4 @@ ScrollTrigger.matchMedia({
         },"my")
 
 }
-
 });
