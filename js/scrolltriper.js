@@ -1,7 +1,7 @@
 gsap.registerPlugin(ScrollTrigger);
 ScrollTrigger.matchMedia({
 
-"(min-width:821px)" : function(){
+"(min-width:881px)" : function(){
 
     var imgscroll = gsap.timeline({
         scrollTrigger : {
@@ -56,7 +56,7 @@ ScrollTrigger.matchMedia({
         },"my")
 
 },
-"(max-width:820px)" : function(){
+"(max-width:880px)" : function(){
 
     gsap.set("#img .img_in .img_box",{
             width: "50%",
@@ -72,11 +72,11 @@ ScrollTrigger.matchMedia({
     var imgscroll = gsap.timeline({
         scrollTrigger : {
             trigger : "#img",
-            start : "40% 40%",
-            end : "center top",
+            start : "30% 40%",
+            end : "15% top",
             scrub : 1,
             invalidateOnRefresh : true,
-            //markers:true
+            // markers:true
         },
         defaults : {
             ease: "power1.out"
@@ -85,7 +85,7 @@ ScrollTrigger.matchMedia({
     imgscroll
         .to('#img .img_in .img_box',{
             width : "100%",
-            height : "70vw",
+            height : "150vw",
         },"my")
         .to('#img .img_in h2:nth-of-type(1)',{
             x : "-100vw",
@@ -94,6 +94,9 @@ ScrollTrigger.matchMedia({
         .to('#img .img_in h2:nth-of-type(2)',{
             x: "100vw",
             color: "#2d2d2d"
+        },"my")
+        .to('#img p',{
+            color: "#ffffff"
         },"my")
 
 }

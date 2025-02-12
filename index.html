@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>박수희 포트폴리오</title>
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
   <!--프리텐다드-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -27,6 +30,9 @@
             <a href="#project">Project</a>
           </li>
           <li>
+            <a href="#contents">Gallery</a>
+          </li>
+          <li>
             <a href="#contact">Contact</a>
           </li>
         </ul>
@@ -44,6 +50,9 @@
               </li>
               <li>
                 <a href="#project">Project</a>
+              </li>
+              <li>
+                <a href="#contents">Gallery</a>
               </li>
               <li>
                 <a href="#contact">Contact</a>
@@ -116,6 +125,333 @@
           </a>
         </li>
       </ul>
+    </section>
+    <section id="contents">
+      <div class="tabs-container swiper-container">
+        <div class="tabs swiper-wrapper">
+          <button class="swiper-slide on" data-filter="*">전체</button>
+          <button class="swiper-slide" data-filter=".banner">배너</button>
+          <button class="swiper-slide"  data-filter=".promotion">상세페이지</button>
+          <button class="swiper-slide"  data-filter=".poster">포스터</button>
+          <button class="swiper-slide"  data-filter=".pattern">패턴디자인</button>
+          <button class="swiper-slide"  data-filter=".edit">인쇄·편집</button>
+          <button class="swiper-slide"  data-filter=".sns">SNS 콘텐츠</button>
+          <button class="swiper-slide"  data-filter=".character">캐릭터 일러스트</button>
+        </div>
+      </div>
+      <div class="grid-gallery">
+        <div class="grid">
+          <div class="grid-sizer"></div>
+          <div class="grid-item banner">
+            <img src="img/grid-01.jpg" alt="배너">
+            <p>
+              루트리 메인 웹 배너
+            </p>
+          </div>
+          <div class="grid-item banner">
+            <img src="img/grid-02.jpg" alt="배너">
+            <p>
+              피스오브럭 겨울시즌이벤트 배너
+            </p>
+          </div>
+          <div class="grid-item edit">
+            <img src="img/grid-03.jpg" alt="삽지">
+            <p>
+              석영침장 스판 극세사 이불 패키지 삽지
+            </p>
+          </div>
+          <div class="grid-item pattern">
+            <img src="img/grid-04.jpg" alt="패턴">
+            <p>
+              피스오브럭 캐릭터 일러스트 패턴
+            </p>
+          </div>
+          <div class="grid-item poster">
+            <img src="img/grid-05.jpg" alt="포스터">
+            <p>
+              힐리 전시회 온라인 포스터
+            </p>
+          </div>
+          <div class="grid-item poster">
+            <img src="img/grid-06.jpg" alt="포스터">
+            <p>
+              힐리 전시회 온라인 포스터
+            </p>
+          </div>
+          <div class="grid-item sns">
+            <img src="img/grid-07.jpg" alt="콘텐츠">
+            <p>
+              부산예일직업전문학교 직업상담사 과정 홍보 이미지
+            </p>
+          </div>
+          <div class="grid-item banner">
+            <img src="img/grid-08.jpg" alt="배너">
+            <p>
+              피스오브럭 메인 프로모션 웹 배너
+            </p>
+          </div>
+          <div class="grid-item edit">
+            <img src="img/grid-09.jpg" alt="삽지">
+            <p>
+              기능성 섬유 냉감이불 패키지 삽지
+            </p>
+          </div>
+          <div class="grid-item sns">
+            <img src="img/grid-10.jpg" alt="콘텐츠">
+            <p>
+              2024 국민취업지원제도 무엇이 달라졌을까? 인스타그램 카드뉴스
+            </p>
+          </div>
+          <div class="grid-item pattern">
+            <img src="img/grid-11.jpg" alt="패턴디자인">
+            <p>
+              S/S플라워 패턴
+            </p>
+          </div>
+          <div class="grid-item promotion">
+            <img src="img/grid-12.jpg" alt="상세페이지">
+            <p>
+              부산예일직업전문학교 관광·컨벤션 실무 교육 과정 상세페이지
+            </p>
+          </div>
+          <div class="grid-item pattern">
+            <img src="img/grid-13.jpg" alt="패턴디자인">
+            <p>
+              F/W플라워 패턴
+            </p>
+          </div>
+          <div class="grid-item character">
+            <img src="img/grid-14.jpg" alt="캐릭터">
+            <p>
+              피스오브럭 비브 캐릭터 일러스트
+            </p>
+          </div>
+          <div class="grid-item banner">
+            <img src="img/grid-15.jpg" alt="배너">
+            <p>
+              피스오브럭 크리스마스 시즌 이벤트 배너
+            </p>
+          </div>
+          <div class="grid-item sns">
+            <img src="img/grid-16.jpg" alt="콘텐츠">
+            <p>
+              부산예일직업전문학교 국비 교육 상담 인스타그램 광고 이미지
+            </p>
+          </div>
+          <div class="grid-item edit">
+            <img src="img/grid-17.jpg" alt="삽지">
+            <p>
+              화창한이불 스판극세사 이불패키지 삽지
+            </p>
+          </div>
+          <div class="grid-item banner">
+            <img src="img/grid-18.jpg" alt="배너">
+            <p>
+              부산예일직업전문학교 홈페이지 웹 배너
+            </p>
+          </div>
+          <div class="grid-item promotion">
+            <img src="img/grid-19.jpg" alt="상세페이지">
+            <p>
+              부산예일직업전문학교 국제무역사 1급 자격증 과정 상세페이지
+            </p>
+          </div>
+          <div class="grid-item character">
+            <img src="img/grid-20.jpg" alt="일러스트">
+            <p>
+              피스오브럭 비브 캐릭터 일러스트 월페이퍼
+            </p>
+          </div>
+          <div class="grid-item sns">
+            <img src="img/grid-21.jpg" alt="콘텐츠">
+            <p>
+              부산예일직업전문학교 XR게임 교육과정 sns홍보 이미지
+            </p>
+          </div>
+          <div class="grid-item character">
+            <img src="img/grid-22.jpg" alt="일러스트">
+            <p>
+              피스오브럭 비브 캐릭터 일러스트 월페이퍼
+            </p>
+          </div>
+          <div class="grid-item promotion">
+            <img src="img/grid-23.jpg" alt="상세페이지">
+            <p>
+              부산예일직업전문학교 교육과정 상담 상세페이지
+            </p>
+          </div>
+          <div class="grid-item pattern">
+            <img src="img/grid-24.jpg" alt="패턴디자인">
+            <p>
+              F/W플라워 패턴
+            </p>
+          </div>
+          <div class="grid-item sns">
+            <img src="img/grid-25.jpg" alt="콘텐츠">
+            <p>
+              부산예일직업전문학교 인공지능 웹 개발 교육과정 sns홍보 이미지
+            </p>
+          </div>
+          <div class="grid-item sns">
+            <img src="img/grid-26.jpg" alt="콘텐츠">
+            <p>
+              부산 게임 교육과정 인스타그램 카드뉴스
+            </p>
+          </div>
+          <div class="grid-item poster">
+            <img src="img/grid-27.jpg" alt="포스터">
+            <p>
+              부산예일직업전문학교 관광 마케팅 교육과정 온라인 포스터
+            </p>
+          </div>
+          <div class="grid-item banner">
+            <img src="img/grid-28.jpg" alt="배너">
+            <p>
+              루트리 이벤트 웹 배너
+            </p>
+          </div>
+          <div class="grid-item promotion">
+            <img src="img/grid-29.jpg" alt="상세페이지">
+            <p>
+              부산예일직업전문학교 국비 교육과정 프로모션 홍보
+            </p>
+          </div>
+          <div class="grid-item sns">
+            <img src="img/grid-30.jpg" alt="콘텐츠">
+            <p>
+              부산예일직업전문학교 관광 마케팅 교육과정 sns홍보 이미지
+            </p>
+          </div>
+          <div class="grid-item character">
+            <img src="img/grid-31.jpg" alt="일러스트">
+            <p>
+              피스오브럭 캐릭터 일러스트 월페이퍼
+            </p>
+          </div>
+          <div class="grid-item poster">
+            <img src="img/grid-32.jpg" alt="포스터">
+            <p>
+              힐리 전시회 온라인 포스터
+            </p>
+          </div>
+          <div class="grid-item character pattern">
+            <img src="img/grid-33.jpg" alt="콘텐츠">
+            <p>
+              고양이 일러스트 패턴
+            </p>
+          </div>
+          <div class="grid-item banner">
+            <img src="img/grid-34.jpg" alt="배너">
+            <p>
+              라이프스타일 브랜드 피스오브럭 선물하기 프로모션 앱 배너
+            </p>
+          </div>
+          <div class="grid-item edit">
+            <img src="img/grid-35.jpg" alt="삽지">
+            <p>
+              듀라온 냉감 이불 패키지 삽지
+            </p>
+          </div>
+          <div class="grid-item pattern">
+            <img src="img/grid-36.jpg" alt="패턴디자인">
+            <p>
+              F/W 플라워 패턴
+            </p>
+          </div>
+          <div class="grid-item banner">
+            <img src="img/grid-37.jpg" alt="배너">
+            <p>
+              라이프스타일 브랜드 피스오브럭 메인 앱 배너
+            </p>
+          </div>
+          <div class="grid-item pattern">
+            <img src="img/grid-38.jpg" alt="패턴디자인">
+            <p>
+              동물 일러스트 패턴
+            </p>
+          </div>
+          <div class="grid-item character">
+            <img src="img/grid-39.jpg" alt="일러스트">
+            <p>
+              피스오브럭 크링 캐릭터 일러스트
+            </p>
+          </div>
+          <div class="grid-item banner">
+            <img src="img/grid-40.jpg" alt="배너">
+            <p>
+              라이프스타일 브랜드 피스오브럭 메인 앱 배너
+            </p>
+          </div>
+          <div class="grid-item pattern">
+            <img src="img/grid-41.jpg" alt="패턴디자인">
+            <p>
+              S/S 플라워 패턴
+            </p>
+          </div>
+          <div class="grid-item edit">
+            <img src="img/grid-42.jpg" alt="삽지">
+            <p>
+              화창한이불 아이스스킨 냉감이불 패키지 삽지
+            </p>
+          </div>
+          <div class="grid-item banner">
+            <img src="img/grid-43.jpg" alt="배너">
+            <p>
+              라이프스타일 브랜드 피스오브럭 카테고리 앱 배너
+            </p>
+          </div>
+          <div class="grid-item pattern">
+            <img src="img/grid-44.jpg" alt="패턴디자인">
+            <p>
+              F/W 플라워 패턴
+            </p>
+          </div>
+          <div class="grid-item pattern character">
+            <img src="img/grid-45.jpg" alt="패턴디자인">
+            <p>
+              고양이 캐릭터 일러스트 패턴
+            </p>
+          </div>
+          <div class="grid-item banner">
+            <img src="img/grid-46.jpg" alt="배너">
+            <p>
+              라이프스타일 브랜드 피스오브럭 메인 앱 배너
+            </p>
+          </div>
+          <div class="grid-item pattern">
+            <img src="img/grid-47.jpg" alt="패턴디자인">
+            <p>
+              S/S 기하학 패턴
+            </p>
+          </div>
+          <div class="grid-item pattern">
+            <img src="img/grid-48.jpg" alt="패턴디자인">
+            <p>
+              S/S 플라워 패턴
+            </p>
+          </div>
+          <div class="grid-item edit">
+            <img src="img/grid-49.jpg" alt="삽지">
+            <p>
+              모달 이불 패키지 삽지
+            </p>
+          </div>
+          <div class="grid-item character">
+            <img src="img/grid-50.jpg" alt="일러스트">
+            <p>
+              피스오브럭 윷놀이 일러스트 월페이퍼
+            </p>
+          </div>
+          <div class="grid-item pattern">
+            <img src="img/grid-51.jpg" alt="패턴디자인">
+            <p>
+              F/W 플라워 패턴
+            </p>
+          </div>
+        </div>
+        <div class="gradient-overlay"></div>
+      </div>
+      <button class="more-btn">더보기 <img src="img/errow-bot.png" alt="더보기"></button>    
     </section>
     <section id="about">
       <h3 class="title_text">
@@ -247,9 +583,11 @@
   </div>
 
 
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   <script src="js/scrolltriper.js"></script>
   <script src="js/header.js"></script>
   <script src="js/hamburger.js"></script>
+  <script src="js/test.js"></script>
+  <script src="js/tab-swiper.js"></script>
 </body>
 </html>

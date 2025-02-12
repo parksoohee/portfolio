@@ -5,6 +5,10 @@ body{
   font-weight: 400;
   color: #2d2d2d;
 }
+img{
+  object-fit: cover;
+  width: 100%;
+}
 header{
   position: fixed;
   top: 0;
