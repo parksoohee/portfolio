@@ -66,175 +66,215 @@
       
 //   });
 // });
-const msnry = new Masonry('.grid', {
-    itemSelector: '.grid-item',
-    percentPosition: true,
-    gutter: 19,
-    transitionDuration: '0.3s',
-    initLayout: false, // 초기 레이아웃 자동 실행 방지
-});
-
-let maxHeight = 1280;
-const gridGallery = document.querySelector('.grid-gallery');
-const gradientOverlay = document.querySelector('.gradient-overlay');
-const moreBtn = document.querySelector('.more-btn');
-
-// 🔹 실제 그리드 콘텐츠의 전체 높이를 계산하는 함수
-function getActualGridHeight() {
-    const visibleItems = document.querySelectorAll('.grid-item.show:not(.hide)');
-    let maxBottom = 0;
+// Masonry 인스턴스 생성
+const MasonryGrid = (function() {
+    // 상수 정의
+    const INITIAL_MAX_HEIGHT = 1280;
+    const HEIGHT_INCREMENT = 1280;
+    const RESIZE_DEBOUNCE_TIME = 250;
+    const FADE_OUT_DURATION = 200;
     
-    visibleItems.forEach(item => {
-        const bottom = item.offsetTop + item.offsetHeight;
-        maxBottom = Math.max(maxBottom, bottom);
+    // 주요 DOM 요소
+    const elements = {
+        gridGallery: document.querySelector('.grid-gallery'),
+        gradientOverlay: document.querySelector('.gradient-overlay'),
+        moreBtn: document.querySelector('.more-btn')
+    };
+    
+    // Masonry 인스턴스
+    const msnry = new Masonry('.grid', {
+        itemSelector: '.grid-item',
+        percentPosition: true,
+        gutter: 19,
+        transitionDuration: '0.3s',
+        initLayout: false
     });
     
-    return maxBottom;
-}
+    // 상태 관리
+    let state = {
+        maxHeight: INITIAL_MAX_HEIGHT,
+        resizeTimeout: null
+    };
 
-// 🔹 더보기 버튼 표시 여부를 업데이트하는 함수
-function updateMoreButtonVisibility() {
-    const actualHeight = getActualGridHeight();
-    const currentMaxHeight = parseInt(gridGallery.style.maxHeight);
-    
-    if (actualHeight > currentMaxHeight) {
-        moreBtn.style.display = 'block';
-        gradientOverlay.style.display = 'block';
-    } else {
-        moreBtn.style.display = 'none';
-        gradientOverlay.style.display = 'none';
-    }
-}
-
-// 🔹 이미지 로딩 Promise를 생성하는 함수
-function createImageLoadPromise(img) {
-    return new Promise((resolve) => {
-        if (img.complete) {
-            resolve();
-        } else {
-            img.onload = resolve;
+    // CSS 클래스 정의
+    const cssClasses = {
+        fadeIn: {
+            opacity: '1',
+            transform: 'translateY(0)',
+            transition: 'opacity 0.3s ease-in-out, transform 0.3s ease-in-out'
+        },
+        fadeOut: {
+            opacity: '0',
+            transform: 'translateY(20px)',
+            transition: 'opacity 0.2s ease-out'
         }
-    });
-}
+    };
 
-// 🔹 그리드 레이아웃을 업데이트하는 함수
-async function updateGridLayout() {
-    const visibleImages = document.querySelectorAll('.grid-item.show:not(.hide) img');
-    const imagePromises = Array.from(visibleImages).map(createImageLoadPromise);
-    
-    await Promise.all(imagePromises);
-    
-    return new Promise(resolve => {
-        msnry.once('layoutComplete', () => {
-            updateMoreButtonVisibility();
-            resolve();
-        });
-        
-        msnry.layout();
-    });
-}
+    // 유틸리티 함수
+    function applyStyles(element, styles) {
+        Object.assign(element.style, styles);
+    }
 
-// 처음에는 일정 높이만큼 보이게 설정
-gridGallery.style.maxHeight = `${maxHeight}px`;
+    function getActualGridHeight() {
+        const visibleItems = document.querySelectorAll('.grid-item.show:not(.hide)');
+        return Array.from(visibleItems).reduce((maxBottom, item) => {
+            const bottom = item.offsetTop + item.offsetHeight;
+            return Math.max(maxBottom, bottom);
+        }, 0);
+    }
 
-document.querySelectorAll('.grid-item').forEach(item => {
-    item.classList.add('show');
-});
-
-// 더보기 버튼 클릭 이벤트
-moreBtn.addEventListener('click', async () => {
-    maxHeight += 1280;
-    gridGallery.style.maxHeight = `${maxHeight}px`;
-    await updateGridLayout();
-    updateMoreButtonVisibility();
-});
-
-// 필터 버튼 클릭 이벤트
-document.querySelectorAll('.tabs button').forEach(button => {
-    button.addEventListener('click', async () => {
-        const filterValue = button.getAttribute('data-filter');
-        
-        // 현재 보이는 아이템들 페이드 아웃
-        const currentItems = document.querySelectorAll('.grid-item.show:not(.hide)');
-        currentItems.forEach(item => {
-            item.style.opacity = '0';
-            item.style.transition = 'opacity 0.2s ease-out';
-        });
-        
-        // 페이드 아웃 완료 대기
-        await new Promise(resolve => setTimeout(resolve, 200));
-        
-        // 필터링 적용
-        document.querySelectorAll('.grid-item').forEach(item => {
-            if (filterValue === '*' || item.classList.contains(filterValue.substring(1))) {
-                item.classList.remove('hide');
-                item.classList.add('show');
-                item.style.opacity = '0';
-                item.style.transform = 'translateY(20px)';
-                item.style.transition = 'opacity 0.3s ease-in-out, transform 0.3s ease-in-out';
+    function createImageLoadPromise(img) {
+        return new Promise((resolve, reject) => {
+            if (img.complete) {
+                resolve();
             } else {
-                item.classList.add('hide');
-                item.classList.remove('show');
+                img.onload = resolve;
+                img.onerror = () => reject(new Error(`Failed to load image: ${img.src}`));
             }
         });
-
-        // 필터링 후 초기화
-        maxHeight = 1280;
-        gridGallery.style.maxHeight = `${maxHeight}px`;
-        
-        // 레이아웃 업데이트
-        msnry.reloadItems();
-        await updateGridLayout();
-        
-        // 필터링된 아이템들 페이드 인
-        document.querySelectorAll('.grid-item.show:not(.hide)').forEach(item => {
-            requestAnimationFrame(() => {
-                item.style.opacity = '1';
-                item.style.transform = 'translateY(0)';
-            });
-        });
-// 전체 필터 선택 시 더보기 버튼과 오버레이 활성화
-if (filterValue === '*') {
-    moreBtn.style.display = 'block';
-    gradientOverlay.style.display = 'block';
-} else {
-    // 실제 높이에 맞춰 maxHeight 조정
-    const actualHeight = getActualGridHeight();
-    if (actualHeight > maxHeight) {
-        maxHeight = actualHeight;
-        gridGallery.style.maxHeight = `${maxHeight}px`;
     }
-    // 더보기 버튼 표시 여부 업데이트
-    updateMoreButtonVisibility();
-}
-    });
-});
 
-// 반응형 사이즈 변경 시 처리
-let resizeTimeout;
-window.addEventListener('resize', () => {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(async () => {
-        await updateGridLayout();
-        updateMoreButtonVisibility();
-    }, 250);
-});
+    // 상태 업데이트 함수
+    function updateMoreButtonVisibility() {
+        const actualHeight = getActualGridHeight();
+        const currentMaxHeight = parseInt(elements.gridGallery.style.maxHeight);
+        
+        elements.moreBtn.style.display = actualHeight > currentMaxHeight ? 'block' : 'none';
+        elements.gradientOverlay.style.display = actualHeight > currentMaxHeight ? 'block' : 'none';
+    }
 
-// 초기 로드 시 레이아웃 설정
-document.addEventListener('DOMContentLoaded', async () => {
-    const allImages = document.querySelectorAll('.grid-item img');
-    const allImagePromises = Array.from(allImages).map(createImageLoadPromise);
-    
-    await Promise.all(allImagePromises);
-    await updateGridLayout();
-    updateMoreButtonVisibility();
-});
+    async function updateGridLayout() {
+        try {
+            const visibleImages = document.querySelectorAll('.grid-item.show:not(.hide) img');
+            await Promise.all(Array.from(visibleImages).map(createImageLoadPromise));
+            
+            return new Promise(resolve => {
+                const layoutHandler = () => {
+                    updateMoreButtonVisibility();
+                    msnry.off('layoutComplete', layoutHandler);
+                    resolve();
+                };
+                
+                msnry.on('layoutComplete', layoutHandler);
+                msnry.layout();
+            });
+        } catch (error) {
+            console.error('Error updating grid layout:', error);
+            throw error;
+        }
+    }
 
-// 이미지 로드 완료 시 레이아웃 업데이트
-msnry.on('layoutComplete', () => {
-    document.querySelectorAll('.grid-item.show:not(.hide)').forEach(item => {
-        item.style.opacity = '1';
-        item.style.transform = 'translateY(0)';
-    });
-    updateMoreButtonVisibility();
-});
+    // 이벤트 핸들러
+    async function handleMoreButtonClick() {
+        try {
+            state.maxHeight += HEIGHT_INCREMENT;
+            elements.gridGallery.style.maxHeight = `${state.maxHeight}px`;
+            await updateGridLayout();
+            updateMoreButtonVisibility();
+        } catch (error) {
+            console.error('Error handling more button click:', error);
+        }
+    }
+
+    async function handleFilterButtonClick(filterValue) {
+        try {
+            // 현재 보이는 아이템들 페이드 아웃
+            const currentItems = document.querySelectorAll('.grid-item.show:not(.hide)');
+            currentItems.forEach(item => applyStyles(item, cssClasses.fadeOut));
+            
+            await new Promise(resolve => setTimeout(resolve, FADE_OUT_DURATION));
+            
+            // 필터링 적용
+            document.querySelectorAll('.grid-item').forEach(item => {
+                const shouldShow = filterValue === '*' || item.classList.contains(filterValue.substring(1));
+                item.classList.toggle('hide', !shouldShow);
+                item.classList.toggle('show', shouldShow);
+                
+                if (shouldShow) {
+                    applyStyles(item, cssClasses.fadeOut);
+                }
+            });
+
+            // 필터링 후 초기화 및 레이아웃 업데이트
+            state.maxHeight = filterValue === '*' ? INITIAL_MAX_HEIGHT : getActualGridHeight();
+            elements.gridGallery.style.maxHeight = `${state.maxHeight}px`;
+            
+            msnry.reloadItems();
+            await updateGridLayout();
+            
+            // 필터링된 아이템들 페이드 인
+            requestAnimationFrame(() => {
+                document.querySelectorAll('.grid-item.show:not(.hide)').forEach(item => {
+                    applyStyles(item, cssClasses.fadeIn);
+                });
+            });
+            
+            // 더보기 버튼 상태 업데이트
+            if (filterValue === '*') {
+                elements.moreBtn.style.display = 'block';
+                elements.gradientOverlay.style.display = 'block';
+            } else {
+                updateMoreButtonVisibility();
+            }
+        } catch (error) {
+            console.error('Error handling filter button click:', error);
+        }
+    }
+
+    // 초기화 함수
+    async function initialize() {
+        try {
+            // DOM 요소 확인
+            if (!elements.gridGallery || !elements.gradientOverlay || !elements.moreBtn) {
+                throw new Error('Required DOM elements not found');
+            }
+
+            // 초기 설정
+            elements.gridGallery.style.maxHeight = `${state.maxHeight}px`;
+            document.querySelectorAll('.grid-item').forEach(item => item.classList.add('show'));
+
+            // 이벤트 리스너 등록
+            elements.moreBtn.addEventListener('click', handleMoreButtonClick);
+            
+            document.querySelectorAll('.tabs button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const filterValue = button.getAttribute('data-filter');
+                    handleFilterButtonClick(filterValue);
+                });
+            });
+
+            // 리사이즈 이벤트 처리
+            window.addEventListener('resize', () => {
+                clearTimeout(state.resizeTimeout);
+                state.resizeTimeout = setTimeout(async () => {
+                    await updateGridLayout();
+                    updateMoreButtonVisibility();
+                }, RESIZE_DEBOUNCE_TIME);
+            });
+
+            // 초기 레이아웃 설정
+            const allImages = document.querySelectorAll('.grid-item img');
+            await Promise.all(Array.from(allImages).map(createImageLoadPromise));
+            await updateGridLayout();
+            updateMoreButtonVisibility();
+
+            // Masonry 레이아웃 완료 이벤트 처리
+            msnry.on('layoutComplete', () => {
+                document.querySelectorAll('.grid-item.show:not(.hide)').forEach(item => {
+                    applyStyles(item, cssClasses.fadeIn);
+                });
+                updateMoreButtonVisibility();
+            });
+        } catch (error) {
+            console.error('Error initializing Masonry grid:', error);
+        }
+    }
+
+    // 공개 API
+    return {
+        initialize
+    };
+})();
+
+// DOM 로드 완료 시 초기화
+document.addEventListener('DOMContentLoaded', MasonryGrid.initialize);
